@@ -30,8 +30,9 @@ export const MobileInputComponent = ({
   
   return(
     <View style={styles.container}>
+      <Text style={{ ...styles.text, color: Colours.blue }}>+44 </Text>
       <TextInput
-        style={styles.text}
+        style={{ ...styles.text, backgroundColor: Colours.lightGreen }}
         onChangeText={handleChangeText}
         returnKeyType={"done"}
         keyboardType={"number-pad"}
@@ -45,10 +46,10 @@ export const MobileInputComponent = ({
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: Colours.lightGreen,
+    backgroundColor: Colours.transparent,
     alignSelf: "center",
     padding: 5,
-    flexDirection: "column",
+    flexDirection: "row",
     width: ScreenSize.width87,
     borderColor: Colours.transparent,
     borderBottomColor: Colours.grey73,
@@ -57,5 +58,7 @@ const styles = StyleSheet.create({
   text: {
     fontSize: RFPercentage(2.35),
     fontWeight: "400",
+    color: Colours.black,
+    backgroundColor: Colours.transparent,
   }
 })
