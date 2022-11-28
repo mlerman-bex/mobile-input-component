@@ -10,7 +10,8 @@ import {
 import {RFPercentage} from "react-native-responsive-fontsize";
 
 import {Colours} from './Colours';
-import {ScreenSize} from "./FontSize";
+import {ScreenSize} from "./FontSize"; // change to screensize
+// import fontsize
 
 export const MobileInputComponent = ({
   setValue,
