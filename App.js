@@ -1,5 +1,4 @@
 /* eslint-disable no-trailing-spaces */
-/* eslint-disable quotes */
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable prettier/prettier */
 import React from 'react';
