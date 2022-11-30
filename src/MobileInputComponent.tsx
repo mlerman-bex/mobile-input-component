@@ -6,8 +6,8 @@ import {
   StyleSheet,
   Platform,
   Alert,
+  TouchableOpacity,
 } from "react-native";
-import {RFPercentage} from "react-native-responsive-fontsize";
 
 import {Colours} from './Colours';
 import {ScreenSize} from "./ScreenSize";
@@ -22,26 +22,32 @@ export const MobileInputComponent = ({
   value?: number;
   editable?: boolean;
 }) => {
+  const reference: any = React.useRef(null);
+
   const handleChangeText = (text: string) => {
     // if (text.match(/[a-z]/)) {
     //   Alert.alert("match");
     // }
     setValue(text);
-  }
+  } 
   
   return(
-    <View style={styles.container}>
+    <TouchableOpacity
+      onPress={() => reference.current.focus()}
+      style={styles.container}>
       <Text style={{ ...styles.text, color: Colours.blue }}>+44 </Text>
       <TextInput
-        style={{ ...styles.text, backgroundColor: Colours.lightGreen }}
+        ref={reference}
+        style={styles.text}
         onChangeText={handleChangeText}
+        value={value?.toString()}
         returnKeyType={"done"}
         keyboardType={"number-pad"}
         maxLength={10}
         multiline={false}
         editable={editable}
       />
-    </View>
+    </TouchableOpacity>
   );
 };
 
@@ -49,7 +55,6 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: Colours.transparent,
     alignSelf: "center",
-    padding: 5,
     flexDirection: "row",
     width: ScreenSize.width87,
     borderColor: Colours.transparent,
