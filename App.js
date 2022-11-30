@@ -5,20 +5,13 @@
 import React from 'react';
 import {
   SafeAreaView,
-  ScrollView,
   StatusBar,
-  StyleSheet,
-  Text,
   useColorScheme,
   View,
 } from 'react-native';
 
 import {
   Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 import { MobileInputComponent } from './src/MobileInputComponent';
 
@@ -40,7 +33,7 @@ const App = () => {
       
         <View
           style={{ margin: 10 }}>
-          <MobileInputComponent setValue={setMobileInput} />
+          <MobileInputComponent setValue={setMobileInput} value={mobileInput} />
         </View>
     </SafeAreaView>
   );
