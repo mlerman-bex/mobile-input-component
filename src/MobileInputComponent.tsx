@@ -25,10 +25,10 @@ export const MobileInputComponent = ({
   const reference: any = React.useRef(null);
 
   const handleChangeText = (text: string) => {
-    // if (text.match(/[a-z]/)) {
-    //   Alert.alert("match");
-    // }
-    setValue(text);
+    const phoneNumber = text.replace(/[^0-9]/, "");
+
+    phoneNumber.charAt(0) === "0" ? setValue(phoneNumber.substring(1))
+                                  : setValue(phoneNumber);
   } 
   
   return(
