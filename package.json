@@ -12,7 +12,10 @@
     "_comment": "above command is used so as to not have to repeat 'bundle install && RCT_NEW_ARCH_ENABLED=1 bundle exec pod install' each time a dependancy with native code changes"
   },
   "dependencies": {
+    "@types/enzyme": "^3.10.12",
+    "enzyme": "^3.11.0",
     "react": "18.1.0",
+    "react-dom": "^18.2.0",
     "react-native": "0.70.6",
     "react-native-responsive-fontsize": "^0.5.1"
   },
@@ -20,8 +23,10 @@
     "@babel/core": "^7.12.9",
     "@babel/runtime": "^7.12.5",
     "@react-native-community/eslint-config": "^2.0.0",
-    "@types/react": "^18.0.25",
-    "@types/react-native": "^0.70.7",
+    "@testing-library/react-native": "^11.5.0",
+    "@types/react": "^18.0.26",
+    "@types/react-native": "^0.70.8",
+    "@wojtekmaj/enzyme-adapter-react-17": "^0.8.0",
     "babel-jest": "^26.6.3",
     "eslint": "^7.32.0",
     "jest": "^26.6.3",
@@ -29,6 +34,34 @@
     "react-test-renderer": "18.1.0"
   },
   "jest": {
-    "preset": "react-native"
-  }
+    "preset": "react-native",
+    "transformIgnorePatterns": [
+      "node_modules/(?!@react-native|react-native)"
+    ],
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ],
+    "testPathIgnorePatterns": [
+      "__tests__/App-test.js",
+      "__tests__/ShallowWrapper-test.js"
+    ]
+  },
+  "description": "",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mlerman-bex/mobile-input-component.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mlerman-bex/mobile-input-component/issues"
+  },
+  "homepage": "https://github.com/mlerman-bex/mobile-input-component#readme"
 }
