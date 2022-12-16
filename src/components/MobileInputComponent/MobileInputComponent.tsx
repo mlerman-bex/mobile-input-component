@@ -1,13 +1,9 @@
-import React from "react";
+import React, {useCallback} from "react";
 import {
   View,
   TextInput,
   Text,
   StyleSheet,
-  Platform,
-  Alert,
-  TouchableOpacity,
-  Dimensions,
 } from "react-native";
 
 import {Colours} from '../Support files/Colours';
@@ -20,26 +16,25 @@ export const MobileInputComponent = ({
   editable = true,
 }: {
   setValue: Function;
-  value?: number;
+  value?: string;
   editable?: boolean;
 }) => {
-  const {width, height} = Dimensions.get("window");
-  const reference: any = React.useRef(null);
-
   const handleChangeText = (text: string) => {
-    const phoneNumber = text.replace(/[^0-9]/, "");
-    phoneNumber.charAt(0) === "0" ? setValue(phoneNumber.substring(1)) : setValue(phoneNumber);
-  } 
+    const phoneNumber: string = text.replace(/[^0-9]/, "");
+    phoneNumber.charAt(0) === "0" ? setValue(phoneNumber.substring(1)) : setValue(phoneNumber); // removes the 0 if it's placed in front of the rest of the phone number
+  }
+
+  // memoized the handleChangeText method to prevent the whole component re-rendering when the inputted text changes
+  const memoizedHandleChangeText = useCallback(handleChangeText, []);
   
   return (
     <View style={{margin: 10}}>
       <View style={styles.container}>
         <Text style={{ ...styles.text, color: Colours.blue, width: ScreenSize.width11 }}>+44 </Text>
         <TextInput
-          ref={reference}
           style={{ ...styles.text, flex: 1, marginBottom: ScreenSize.margin4 }}
-          onChangeText={handleChangeText}
-          value={value?.toString()}
+          onChangeText={memoizedHandleChangeText}
+          value={value}
           returnKeyType={"done"}
           keyboardType={"number-pad"}
           maxLength={10}
