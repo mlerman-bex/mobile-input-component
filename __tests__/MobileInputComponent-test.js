@@ -30,7 +30,6 @@ describe('testing the functionality of the MobileInputComponent', () => {
     const testTextInput = getByTestId('testTextInput');
 
     fireEvent.changeText(testTextInput, phoneNumber);
-
     expect(setValueMock).toHaveBeenCalledWith('7752202630'); // checks the setValue function gets called with the expected phone number
   });
 
@@ -43,7 +42,6 @@ describe('testing the functionality of the MobileInputComponent', () => {
     const testTextInput = getByTestId('testTextInput');
 
     fireEvent.changeText(testTextInput, phoneNumber);
-
     expect(setValueMock.mock.calls[0][0][0]).toBe('7') && // checks the phone number starts with 7
     expect(setValueMock.mock.calls[0][0]).toHaveLength(10); // checks the phone number has 10 characters
   });
@@ -57,7 +55,6 @@ describe('testing the functionality of the MobileInputComponent', () => {
     const testTextInput = getByTestId('testTextInput');
 
     fireEvent.changeText(testTextInput, phoneNumber);
-
     expect(setValueMock.mock.calls[0][0][0]).not.toBe('7') && // .not is used to expect the test case to 'fail' which passes the test
     expect(setValueMock.mock.calls[0][0]).not.toHaveLength(10);
   });
