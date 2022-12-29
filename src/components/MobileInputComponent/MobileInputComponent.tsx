@@ -1,4 +1,4 @@
-import React, {useCallback, useRef} from "react";
+import React, {useCallback} from "react";
 import {
   View,
   TextInput,
@@ -18,13 +18,11 @@ export const MobileInputComponent = ({
   value?: string;
   editable?: boolean;
 }) => {
-  const handleChangeText = (text: string) => {
+  // memoized the handleChangeText method to prevent the whole component re-rendering when the inputted text changes
+  const memoizedHandleChangeText = useCallback((text: string) => {
     const phoneNumber: string = text.replace(/[^0-9]/, "");
     phoneNumber.charAt(0) === "0" ? setValue(phoneNumber.substring(1)) : setValue(phoneNumber); // removes the 0 if it's placed in front of the rest of the phone number
-  }
-
-  // memoized the handleChangeText method to prevent the whole component re-rendering when the inputted text changes
-  const memoizedHandleChangeText = useCallback(handleChangeText, []);
+  }, []);
   
   return (
     <View style={{...Styles.container, height: ScreenSize.height6p4}}>

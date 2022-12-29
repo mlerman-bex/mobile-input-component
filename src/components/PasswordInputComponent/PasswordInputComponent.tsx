@@ -37,16 +37,14 @@ export const PasswordInputComponent = ({
   const [focus, setFocus] = useState(false); // focus hook used to determine position of input label
   const [temporaryPlaceholder, setTemporaryPlaceholder] = useState(placeholder);
 
-  const handleChangeText = (text: string) => {
-    setPassword(text);
-  };
-
   const togglePasswordVisible = () => {
     setPasswordVisible(!passwordVisible);
   }
 
   // memoized the handleChangeText method to prevent the whole component re-rendering when the inputted text changes
-  const memoizedHandleChangeText = useCallback(handleChangeText, []);
+  const memoizedHandleChangeText = useCallback((text: string) => {
+    setPassword(text);
+  }, []);
 
   return(
     <View accessibilityLabel={`Enter ${placeholder}`} accessible={true}>

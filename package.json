@@ -51,7 +51,9 @@
     ],
     "testPathIgnorePatterns": [
       "__tests__/App-test.js",
-      "__tests__/ShallowWrapper-test.js"
+      "__tests__/ShallowWrapper-test.js",
+      "__tests__/InputComponent-test.js",
+      "__tests__/MobileInputComponent-test.js"
     ]
   },
   "description": "",

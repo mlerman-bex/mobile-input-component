@@ -1,23 +1,19 @@
 /* eslint-disable prettier/prettier */
 import React from 'react';
-import {render, fireEvent, create} from '@testing-library/react-native';
+import {render, fireEvent} from '@testing-library/react-native';
 import {toHaveStyle} from '@testing-library/jest-native/dist/to-have-style';
 import '@testing-library/jest-native/extend-expect';
 import {act} from 'react-test-renderer';
 
-import {Min8CharactersText} from '../src/components/min8CharactersText/Min8CharactersText';
+import {MinimumCharactersText} from '../src/components/PasswordInclusions/PasswordInclusions';
 import {PasswordInputComponent} from '../src/components/PasswordInputComponent/PasswordInputComponent';
-import {Colours} from '../src/components/Support files/Colours';
+import {Styles} from '../src/components/Support files/Styles';
 
 expect.extend({toHaveStyle}); // allows for testing with .toHaveStyle()
 
 describe('testing the functionality of the CreatePasswordScreen', () => {
-  // const [colour, setColour] = useState('red'); // this gave an error [TypeError: Cannot read properties of null (reading 'useState')] which is why the useState method hasn't been used
-
   const validateLength = (password) => { return password.length >= 8; };
   const validateCase = (password, caseToMatch) => { return password.includes(caseToMatch); };
-
-  const changeStyle = (valid) => { if (valid) { return true; } };
 
   it('should render the component', () => {
     const setPasswordMock = jest.fn(); // creates a mock function to be a placeholder for the non-optional-to-include-in-the-props setValue function
@@ -79,24 +75,16 @@ describe('testing the functionality of the CreatePasswordScreen', () => {
 
   it('should change the colour of the "8 characters" Text component from red to green if it matches the case', () => {
     const password = 'Admin@123';
-    const state = changeStyle(validateLength(password));
-    const component = render(<Min8CharactersText />); // would be CreatePasswordScreen
+    const onStateChangeMock = jest.fn();
+    const state = validateLength(password);
+    const component = render(<MinimumCharactersText />); // would be CreatePasswordScreen
     let testText = component.getByTestId('testInclude1');
 
-    expect(testText).toHaveStyle({ color: 'red' });
-    console.log(`validateLength: ${validateLength(password)}`);
-    if (validateLength(password)) {
-      // act(() => {
-      //   component = render(<Min8CharactersText password={password} confirmPassword={password} state={state} />);
-      // });
-
-      // testText = component.getByTestId('testInclude1');
-
-      // expect(testText).toHaveStyle({ color: Colours.green });
-
-      component.rerender(<Min8CharactersText password={password} confirmPassword={password} state={state} />);
-      testText = component.getByTestId('testInclude1');
-      expect(testText).toHaveStyle({ color: 'green' });
-    }
+    expect(testText).toHaveStyle(Styles.invalid); // text component should have style of {color: Colours.red}
+    act(() => {
+      component.rerender(<MinimumCharactersText password={password} confirmPassword={password} state={state} onStateChange={onStateChangeMock} />);
+    });
+    testText = component.getByTestId('testInclude1');
+    expect(testText).toHaveStyle(Styles.valid); // text component should have style of {color: Colours.green}
   });
 });
