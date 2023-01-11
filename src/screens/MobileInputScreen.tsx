@@ -1,8 +1,10 @@
-import React, {useState, useEffect, useCallback} from 'react';
+import React, {useState, useEffect} from 'react';
 import {View, Text} from 'react-native';
 
 import {MobileInputComponent} from '../components/MobileInputComponent/MobileInputComponent';
 import {TestButton} from '../components/TestButton/TestButton';
+import {Styles} from '../components/Support files/Styles';
+import {Break} from '../components/Support files/Break';
 
 export const MobileInputScreen = () => {
   const [mobileInput, setMobileInput] = React.useState('');
@@ -13,12 +15,12 @@ export const MobileInputScreen = () => {
   }, [mobileInput]);
 
   return (
-    <View style={{margin: 30, flexDirection: 'column'}}>
-      <Text>Please enter your UK mobile number:</Text>
-      <View style={{margin: 60}} />
+    <View style={Styles.testMargin}>
+      <Text style={Styles.text}>Please enter your UK mobile number:</Text>
+      <Break size={60} />
       <MobileInputComponent setValue={setMobileInput} value={mobileInput} />
       {/* mobile number sim pop-up done by Rajesh */}
-      <View style={{margin: 220}} />
+      <Break size={220} />
       <TestButton alertMessage={`Mobile number is: +44${mobileInput}`} disabled={!mobileNumberChecked} />
     </View>
   );

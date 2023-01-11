@@ -3,8 +3,12 @@ import React from 'react';
 import {render, fireEvent} from '@testing-library/react-native';
 
 import {MobileInputComponent} from '../src/components/MobileInputComponent/MobileInputComponent';
+import {TestButton} from '../src/components/TestButton/TestButton';
+import {toHaveProp} from '../@types/toHaveProp';
 
-describe('testing the functionality of the MobileInputComponent', () => {
+//expect.extend({toHaveProp});
+
+describe('testing the full functionality of the MobileInputScreen', () => {
   it('should render the component', () => {
     const setValueMock = jest.fn(); // creates a mock function to be a placeholder for the non-optional-to-include-in-the-props setValue function
     const {getByTestId} = render(<MobileInputComponent setValue={setValueMock} />); // creates a 'shallow wrapper' to isolate the testing of the respective parent component to be tested
@@ -58,4 +62,18 @@ describe('testing the functionality of the MobileInputComponent', () => {
     expect(setValueMock.mock.calls[0][0][0]).not.toBe('7') && // .not is used to expect the test case to 'fail' which passes the test
     expect(setValueMock.mock.calls[0][0]).not.toHaveLength(10);
   });
+
+  // tests if the TestButton becomes enabled after the mobileInput value reaches 10 acceptable numbers
+  // it('should make the TestButton enabled after the mobileInput value reaches 10 acceptable numbers', () => {
+  //   const phoneNumber = '7752202630';
+  //   const valueMock = jest.fn('');
+  //   const setValueMock = jest.fn();
+  //   const component1 = render(<MobileInputComponent setValue={setValueMock} value={valueMock} />);
+  //   const testTextInput = component1.getByTestId('testTextInput');
+  //   const messageMock = jest.fn('');
+  //   const component2 = render(<TestButton alertMessage={messageMock} disabled={true} />);
+
+  //   expect(component2).toHaveProp('disabled', true);
+  //   fireEvent.changeText(testTextInput, phoneNumber);
+  // });
 });

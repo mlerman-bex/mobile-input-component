@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import React from 'react';
 import {render, fireEvent} from '@testing-library/react-native';
 
@@ -19,5 +20,25 @@ describe('testing the functionality of the InputComponent', () => {
 
     expect(testTextInputOccurrences).toHaveLength(1);
     expect(testTextInputOccurrences).not.toHaveLength(2);
+  });
+
+  it('should handle a normal text input change', () => {
+    const text = 'Testtext';
+    const setValueMock = jest.fn();
+    const {getByTestId} = render(<InputComponent setValue={setValueMock} testID="testTextInput" />);
+    const testTextInput = getByTestId('testTextInput');
+
+    fireEvent.changeText(testTextInput, text);
+    expect(setValueMock).toHaveBeenCalledWith('Testtext');
+  });
+
+  it('should handle an email text input change', () => {
+    const text = 'exampleemail@gmail.com';
+    const setValueMock = jest.fn();
+    const {getByTestId} = render(<InputComponent setValue={setValueMock} testID="testTextInput" />);
+    const testTextInput = getByTestId('testTextInput');
+
+    fireEvent.changeText(testTextInput, text);
+    expect(setValueMock).toHaveBeenCalledWith('exampleemail@gmail.com');
   });
 });

@@ -3,7 +3,7 @@ import {Button, Alert} from 'react-native';
 
 export const TestButton = (props: {alertMessage: string; disabled: boolean | undefined}) => {
   const handlePress = () => {
-    Alert.alert(props.alertMessage);
+    Alert.alert('TestButton Info', props.alertMessage);
   }
   
   return (

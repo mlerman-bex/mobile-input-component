@@ -9,15 +9,19 @@
     "test": "jest",
     "lint": "eslint .",
     "pod-install": "RCT_NEW_ARCH_ENABLED=1 bundle exec pod install",
-    "_comment": "above command is used so as to not have to repeat 'bundle install && RCT_NEW_ARCH_ENABLED=1 bundle exec pod install' each time a dependancy with native code changes"
+    "_comment": "above command is used so as to not have to repeat 'bundle install && RCT_NEW_ARCH_ENABLED=1 bundle exec pod install' each time a dependancy with native code changes",
+    "clean": "react-native-clean-project"
   },
   "dependencies": {
+    "@expo-google-fonts/be-vietnam": "^0.2.0",
     "@types/enzyme": "^3.10.12",
     "enzyme": "^3.11.0",
+    "expo-font": "^11.0.1",
     "react": "18.1.0",
     "react-dom": "^18.2.0",
     "react-native": "0.70.6",
     "react-native-responsive-fontsize": "^0.5.1",
+    "react-native-svg": "^13.6.0",
     "react-native-vector-icons": "^9.2.0"
   },
   "devDependencies": {
@@ -25,15 +29,20 @@
     "@babel/runtime": "^7.12.5",
     "@react-native-community/eslint-config": "^2.0.0",
     "@testing-library/jest-dom": "^5.16.5",
-    "@testing-library/jest-native": "^5.3.3",
+    "@testing-library/jest-native": "^5.4.0",
     "@testing-library/react-native": "^11.5.0",
     "@types/react": "^18.0.26",
     "@types/react-native": "^0.70.8",
+    "@types/react-native-vector-icons": "^6.4.12",
+    "@types/react-test-renderer": "^18.0.0",
     "@wojtekmaj/enzyme-adapter-react-17": "^0.8.0",
     "babel-jest": "^26.6.3",
     "eslint": "^7.32.0",
     "jest": "^26.6.3",
+    "jest-enzyme": "^7.1.2",
+    "jest-enzyme-matchers": "^1.0.0",
     "metro-react-native-babel-preset": "0.72.3",
+    "react-native-clean-project": "^4.0.1",
     "react-test-renderer": "18.1.0"
   },
   "jest": {
@@ -47,13 +56,12 @@
       "js",
       "jsx",
       "json",
-      "node"
+      "node",
+      "d.ts"
     ],
     "testPathIgnorePatterns": [
       "__tests__/App-test.js",
-      "__tests__/ShallowWrapper-test.js",
-      "__tests__/InputComponent-test.js",
-      "__tests__/MobileInputComponent-test.js"
+      "__tests__/ShallowWrapper-test.js"
     ]
   },
   "description": "",

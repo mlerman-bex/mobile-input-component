@@ -4,11 +4,14 @@ import {
   TextInput,
   Text,
   TouchableOpacity,
+  StyleProp,
+  TextStyle,
 } from "react-native";
-import { Colours } from '../Support files/Colours';
 
+import { Colours } from '../Support files/Colours';
 import {ScreenSize} from '../Support files/ScreenSize';
 import {Styles} from "../Support files/Styles";
+import IconType, { Icons } from '../Support files/VectorIcons';
 
 export const PasswordInputComponent = ({
   setPassword,
@@ -20,7 +23,8 @@ export const PasswordInputComponent = ({
   onFocus = () => null,
   onSubmitEditing = () => null,
   errorLine,
-  testID,
+  vectorIcons,
+  testID = 'testTextInput',
 }: {
   setPassword: Function;
   password?: string;
@@ -31,6 +35,7 @@ export const PasswordInputComponent = ({
   onFocus?: Function;
   onSubmitEditing?: Function;
   errorLine?: boolean;
+  vectorIcons?: boolean;
   testID?: string;
 }) => {
   const [passwordVisible, setPasswordVisible] = useState(false);
@@ -39,12 +44,24 @@ export const PasswordInputComponent = ({
 
   const togglePasswordVisible = () => {
     setPasswordVisible(!passwordVisible);
-  }
+  };
 
   // memoized the handleChangeText method to prevent the whole component re-rendering when the inputted text changes
   const memoizedHandleChangeText = useCallback((text: string) => {
     setPassword(text);
   }, []);
+
+  const determineStyle = () => {
+    if (errorLine) {
+      return {...Styles.container, borderBottomColor: Colours.errorRed, height: ScreenSize.height6p9}
+    }
+    else if (focus) {
+      return {...Styles.container, borderBottomColor: Colours.blue, height: ScreenSize.height6p9} /* 56 pixels high per figma => 5600/812 = 6.9% */
+    }
+    else {
+      return {...Styles.container, height: ScreenSize.height6p9}
+    }
+  }
 
   return(
     <View accessibilityLabel={`Enter ${placeholder}`} accessible={true}>
@@ -55,7 +72,21 @@ export const PasswordInputComponent = ({
           </Text>
         </View>
       )}
-      <View style={errorLine ? {...Styles.container, height: ScreenSize.height6p9, borderBottomColor: Colours.red} : {...Styles.container, height: ScreenSize.height6p9}}>
+      <View style={determineStyle()}>
+        {vectorIcons && (
+          <TouchableOpacity
+            style={[Styles.icon, {marginBottom: ScreenSize.margin0p8}]}
+            onPress={() => null}
+            disabled={true}>
+            <IconType
+              style={Styles.icon}
+              type={Icons.EvilIcons}
+              name={'lock'}
+              size={ScreenSize.width9p5}
+            />
+          </TouchableOpacity>
+        )}
+
         <TextInput
           style={Styles.text}
           onChangeText={memoizedHandleChangeText}
@@ -75,11 +106,22 @@ export const PasswordInputComponent = ({
             onSubmitEditing();
           }}
           blurOnSubmit={true}
-          testID="testTextInput"
+          testID={testID}
         />
-        <TouchableOpacity onPress={togglePasswordVisible} testID="testPasswordToggleTouchableOpacity">
-          <Text style={Styles.showHideToggle} testID="testPasswordToggleText">{passwordVisible ? "hide" : "show"}</Text>
-        </TouchableOpacity>
+
+        {vectorIcons && (
+          <TouchableOpacity
+            style={[Styles.icon, {marginLeft: 'auto'}]}
+            onPress={togglePasswordVisible}
+            disabled={false}>
+            <IconType
+              style={[Styles.icon, {color: Colours.grey73}]}
+              type={Icons.MaterialCommunityIcons}
+              name={passwordVisible ? 'eye' : 'eye-off'}
+              size={ScreenSize.width7}
+            />
+          </TouchableOpacity>
+        )}
       </View>
     </View>
   );

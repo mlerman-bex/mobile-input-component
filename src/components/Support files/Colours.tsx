@@ -18,6 +18,7 @@ export const Colours = {
 
   greyblack: "#C5C5C5",
   payGrey: "#2C3A4B",
+  wetSlate: "#9CA3AF",
 
   midGrey: "#B1B1B1",
   darkGrey: "#525A64",
@@ -44,6 +45,7 @@ export const Colours = {
   darkRed: "#F32F23",
   lightRed: "#EA7292",
   lightestRed: "#FFE4E6",
+  errorRed: "#DC2626",
 
   lightGreen: "#6ED9C8",
   deleteRed: "#FF3B30",

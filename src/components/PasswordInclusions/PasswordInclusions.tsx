@@ -24,9 +24,10 @@ export const MinimumCharactersText = ({password = '', confirmPassword = '', stat
 
 export const LowercaseLetterText = ({password = '', confirmPassword = '', state = false, onStateChange = (_state: boolean) => {null}}) => {
   const [lowercaseLetterPresent, setLowercaseLetterPresent] = useState(state);
+  const regex = /[a-z]/;
 
   useEffect(() => {
-    if (password.match(/[a-z]/) || confirmPassword.match(/[a-z]/)) {
+    if (regex.test(password) || regex.test(confirmPassword)) {
       setLowercaseLetterPresent(true);
     } else {
       setLowercaseLetterPresent(false);
@@ -43,9 +44,10 @@ export const LowercaseLetterText = ({password = '', confirmPassword = '', state 
 
 export const UppercaseLetterText = ({password = '', confirmPassword = '', state = false, onStateChange = (_state: boolean) => {null}}) => {
   const [uppercaseLetterPresent, setUppercaseLetterPresent] = useState(state);
+  const regex = /[A-Z]/;
 
   useEffect(() => {
-    if (password.match(/[A-Z]/) || confirmPassword.match(/[A-Z]/)) {
+    if (regex.test(password) || regex.test(confirmPassword)) {
       setUppercaseLetterPresent(true);
     } else {
       setUppercaseLetterPresent(false);
@@ -60,11 +62,12 @@ export const UppercaseLetterText = ({password = '', confirmPassword = '', state 
   );
 };
 
-export const NumberText = ({password = '', confirmPassword = '', state = false, onStateChange = (_state: boolean) => {null}}) => {
+export const NumberPresent = ({password = '', confirmPassword = '', state = false, onStateChange = (_state: boolean) => {null}}) => {
   const [numberPresent, setNumberPresent] = useState(false);
+  const regex = /[0-9]+/;
 
   useEffect(() => {
-    if (password.match(/[0-9]+/) || confirmPassword.match(/[0-9]+/)) {
+    if (regex.test(password) || regex.test(confirmPassword)) {
       setNumberPresent(true);
     } else {
       setNumberPresent(false);
@@ -81,9 +84,10 @@ export const NumberText = ({password = '', confirmPassword = '', state = false, 
 
 export const SymbolPresent = ({password = '', confirmPassword = '', state = false, onStateChange = (_state: boolean) => {null}}) => {
   const [symbolPresent, setSymbolPresent] = useState(false);
+  const regex = /\W/;
 
   useEffect(() => {
-    if (password.match(/\W/) || confirmPassword.match(/\W/)) {
+    if (regex.test(password) || regex.test(confirmPassword)) {
       setSymbolPresent(true);
     } else {
       setSymbolPresent(false);

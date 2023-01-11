@@ -6,7 +6,7 @@ import {
   MinimumCharactersText,
   LowercaseLetterText,
   UppercaseLetterText,
-  NumberText,
+  NumberPresent,
   SymbolPresent
 } from '../components/PasswordInclusions/PasswordInclusions';
 import {TestButton} from '../components/TestButton/TestButton';
@@ -56,13 +56,17 @@ export const CreatePasswordScreen = () => {
      symbolPresent) ? setPasswordChecked(true) : setPasswordChecked(false);
 
     (!validPassword && password.length > 0 && confirmPassword.length > 0) ? setShowErrorLine(true) : setShowErrorLine(false);
-    
+
   }, [password, confirmPassword, validPassword, minimumCharactersPresent, lowercaseLetterPresent, uppercaseLetterPresent, numberPresent, symbolPresent]);
 
   return (
-    <View style={{margin: 30, flexDirection: 'column'}}>
-      <Text>This will used to log in to your Bex app.</Text>
+    <View style={Styles.testMargin}>
+      <Text>
+        This will used to log in to your Bex app.
+      </Text>
+
       <View style={{margin: 60}} />
+
       <PasswordInputComponent
         setPassword={setPassword}
         password={password}
@@ -70,7 +74,9 @@ export const CreatePasswordScreen = () => {
         inputLabel={'Password'}
         persistentInputLabel
       />
+      
       <View style={{margin: 10}} />
+      
       <PasswordInputComponent
         setPassword={setConfirmPassword}
         password={confirmPassword}
@@ -79,35 +85,45 @@ export const CreatePasswordScreen = () => {
         persistentInputLabel
         errorLine={showErrorLine}
       />
+
       {/* the following checks that the password boxes have at least 1 character in each before checking if the two passwords match */}
       { showErrorLine &&
         <>
           <Text style={Styles.invalid}>The passwords you entered do not match.</Text>
-          <Text style={Styles.invalid}>Please double checknd try again.</Text>
+          <Text style={Styles.invalid}>Please double check and try again.</Text>
         </>
       }
+
       <View style={{margin: 40}} />
-      <Text>So that your password is strong, it must include:</Text>
+
+      <Text>
+        So that your password is strong, it must include:
+      </Text>
+
       <View style={{margin: 5}} />
+
       <MinimumCharactersText
         password={password}
         confirmPassword={confirmPassword}
         state={minimumCharactersPresent}
         onStateChange={memoizedHandleMinimumCharactersPresent}
       />
+
       <LowercaseLetterText
         password={password}
         confirmPassword={confirmPassword}
         state={lowercaseLetterPresent}
         onStateChange={memoizedHandleLowercaseLetterPresent}
       />
+
       <UppercaseLetterText
         password={password}
         confirmPassword={confirmPassword}
         state={uppercaseLetterPresent}
         onStateChange={memoizedHandleUppercaseLetterPresent}
       />
-      <NumberText
+
+      <NumberPresent
         password={password}
         confirmPassword={confirmPassword}
         state={numberPresent}
@@ -119,8 +135,10 @@ export const CreatePasswordScreen = () => {
         state={symbolPresent}
         onStateChange={memoizedHandleSymbolPresent}
       />
+
       <View style={{margin: 60}} />
-      <TestButton alertMessage={`Password is: ${password}`} disabled={!passwordChecked} />
+      
+      <TestButton alertMessage={`Password: ${password}`} disabled={!passwordChecked} />
     </View>
   );
 };

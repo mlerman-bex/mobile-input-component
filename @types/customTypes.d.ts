@@ -1,0 +1,1 @@
+export type InputType = 'default' | 'email' | 'mobile' | 'date' | 'code' | 'login' | 'password' | 'bexPin';
